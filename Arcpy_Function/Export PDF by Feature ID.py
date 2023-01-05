@@ -4,9 +4,6 @@ import pandas as pd
 import datetime
 from multiprocessing import Pool
 
-# Usage
-# "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe" C:\Users\DITZ9027\Desktop\Python code\vscode\Test.py C:\Users\DITZ9027\Desktop\Python code\vscode\TO_RPA\validate_graphic_sample_check_16_12_2022.xlsx 5
-
 def export_PDF_self(x_coordinate, y_coordinate, x2_coordinate, y2_coordinate, zoom_level, layer_config_file_path, map_type, layers, check_id, fid, geometry):
     start_time = datetime.datetime.now()
     if  x2_coordinate == -99999.0:
@@ -33,8 +30,7 @@ def export_PDF_self(x_coordinate, y_coordinate, x2_coordinate, y2_coordinate, zo
     aprxLayout = aprx.listLayouts("Layout")[0]
     mf = aprxLayout.listElements("mapframe_element", "Map Frame")[0]
     new_Extent = mf.camera.getExtent()
-    #x_coordinate = 835368.59
-    #y_coordinate = 815220.63
+
     if  x2_coordinate == -99999.0:
         new_Extent.XMin = x_coordinate - 84.2824387085
         new_Extent.YMin = y_coordinate - 58.99461726475
@@ -65,8 +61,6 @@ def export_PDF_self(x_coordinate, y_coordinate, x2_coordinate, y2_coordinate, zo
     else:
         print('Finish Exporting (' + str(x_coordinate) + ', ' + str(y_coordinate) + ') to (' + str(x2_coordinate) + ', ' + str(y2_coordinate) + ') Zoom ' + str(zoom_level) + ' ' + str(date_time_now) + '.')
         print('Duration for (' + str(x_coordinate) + ', ' + str(y_coordinate) + ') to (' + str(x2_coordinate) + ', ' + str(y2_coordinate) + ') Zoom ' + str(zoom_level) + ' ' + str((date_time_now - start_time).total_seconds()) + '.')
-# r'C:\RPA_DEV\P000-NHGISHealthCheck\PDF\2022-12-07\Exported_PDF_' + str(x_coordinate) + r'_' + str(y_coordinate) + r'_' + str(zoom_level) + r'_' + str(date_time_now.year) + str(date_time_now.month) + str(date_time_now.day) + str(date_time_now.hour) + str(date_time_now.minute) + str(date_time_now.second) + r'.pdf'
-# aprxLayout.exportToPDF(r'C:\RPA_DEV\P000-NHGISHealthCheck\PDF\2022-12-07\Exported_PDF_' + str(x_coordinate) + r'_' + str(y_coordinate) + r'_' + str(x2_coordinate) + r'_' + str(y2_coordinate) + r'_' + str(zoom_level) + r'_' + str(date_time_now.year) + str(date_time_now.month) + str(date_time_now.day) + str(date_time_now.hour) + str(date_time_now.minute) + str(date_time_now.second) + r'.pdf', 300, "BEST", True, "NONE", True, "LAYERS_AND_ATTRIBUTES")
 
 if __name__ == "__main__":
     df = pd.read_excel(r"C:\Users\DITZ9027\Desktop\Python code\vscode\TO_RPA\validate_graphic_sample_check_23_12_2022.xlsx", sheet_name='feature_sample')
